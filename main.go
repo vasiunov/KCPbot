@@ -38,19 +38,18 @@ func getInput(message string) (result int) {
 	sliceInput, _, err := reader.ReadLine() // читаем с консоли в байтовый слайс
 	if err != nil {
 		fmt.Println(err)
-		getInput(message)
+		return getInput(message)
 	}
 
 	input := string(sliceInput)
 
 	for _, elem := range input {
 		if !unicode.IsDigit(elem) || unicode.IsSpace(elem) { // проверяем строку на наличие пробелов и не цифр
-			fmt.Println("Пожалуйста, введите число без лишних символов") // если срабатывает, возвращает 0
-			getInput(message)
-			break
+			fmt.Println("Пожалуйста, введите число без лишних символов")
+			return getInput(message)
+			// break
 		}
 	}
-
 	result, _ = strconv.Atoi(input)
 	return
 }

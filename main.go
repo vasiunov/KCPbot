@@ -14,11 +14,12 @@ func main() {
 	const percSQuota = 10 // доля специальной квоты
 	var intKCP, percTQuota, count, count2 int
 
-	intKCP = getInput("общий показатель КЦП :")
-	percTQuota = getInput("долю целевой квоты :")
+	intKCP = getInput("общий показатель КЦП: ")
+	percTQuota = getInput("долю целевой квоты (в процентах): ")
 
 	flKCP := float64(intKCP)
 
+	// TODO: Get expressions to const - HOW?
 	O := int(math.Ceil(flKCP * percOQuota / 100))             // количество мест по особой квоте
 	S := int(math.Round(flKCP * percSQuota / 100.0))          // количество мест по специальной квоте
 	T := int(math.Round(flKCP * float64(percTQuota) / 100.0)) // количество мест по целевой квоте
@@ -26,6 +27,11 @@ func main() {
 	fmt.Println("Общие сведения")
 	fmt.Printf("КЦП\tОсобая\tСпец\tЦелевая\tПеребор\n")
 	fmt.Printf("%v\t%v\t%v\t%v\t%v\n", intKCP, O, S, T, O+S+T-intKCP)
+
+	// boolOT := getOptions("ОСОБОЙ и ЦЕЛЕВОЙ")
+	// boolOS := getOptions("ОСОБОЙ и СПЕЦИАЛЬНОЙ")
+	// boolST := getOptions("СПЕЦИАЛЬНОЙ и ЦЕЛЕВОЙ")
+	// boolOST := getOptions("ОСОБОЙ, ЦЕЛЕВОЙ и СПЕЦИАЛЬНОЙ")
 
 	getVariants(intKCP, count, count2, O, S, T)
 
@@ -55,6 +61,8 @@ func getInput(message string) (result int) {
 }
 
 func getVariants(intKCP, count, count2, O, S, T int) {
+	// TODO: optimize the code - HOW?
+	// TODO: add conditions (boolOT etc)
 	for o := 0; o < intKCP; o++ { // перебор особой квоты
 		for s := 0; s < intKCP; s++ { // перебор специальной квоты
 			for t := 0; t < intKCP; t++ { // перебор целевой квоты
@@ -64,7 +72,7 @@ func getVariants(intKCP, count, count2, O, S, T int) {
 							for ost := 0; ost < intKCP; ost++ { // перебор особой+специальной+целевой квоты
 								if os+ot+ost+o == O && os+st+ost+s == S && ot+st+ost+t == T && intKCP == o+s+t+os+ot+st+ost {
 									count++
-									// TO DO: писать в файл
+									// TO DO: write to file
 									fmt.Println("==================================================")
 									fmt.Printf("Вариант %v\n", count)
 									fmt.Printf("Плохой вариант %v\n", count2)
@@ -79,5 +87,27 @@ func getVariants(intKCP, count, count2, O, S, T int) {
 				}
 			}
 		}
+	}
+}
+
+func getOptions(option string) bool {
+	var check string
+	fmt.Printf("Использовать совмещение %s?\n", option)
+	fmt.Print("type \"y\" or \"n\": ")
+
+	_, err := fmt.Scan(&check)
+	if err != nil {
+		fmt.Println(err)
+		return getOptions(option)
+	}
+
+	switch check {
+	case "y":
+		return true
+	case "n":
+		return false
+	default:
+		return getOptions(option)
+
 	}
 }

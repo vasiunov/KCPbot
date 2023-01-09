@@ -14,8 +14,8 @@ func main() {
 	const percSQuota = 10 // доля специальной квоты
 	var intKCP, percTQuota, count, count2 int
 
-	intKCP = getInput("Введите общий показатель КЦП ")
-	percTQuota = getInput("Введите долю целевой квоты ")
+	intKCP = getInput("общий показатель КЦП :")
+	percTQuota = getInput("долю целевой квоты :")
 
 	flKCP := float64(intKCP)
 
@@ -27,30 +27,8 @@ func main() {
 	fmt.Printf("КЦП\tОсобая\tСпец\tЦелевая\tПеребор\n")
 	fmt.Printf("%v\t%v\t%v\t%v\t%v\n", intKCP, O, S, T, O+S+T-intKCP)
 
-	for o := 0; o < intKCP; o++ { // перебор особой квоты
-		for s := 0; s < intKCP; s++ { // перебор специальной квоты
-			for t := 0; t < intKCP; t++ { // перебор целевой квоты
-				for os := 0; os < intKCP; os++ { // перебор особой+специальной квоты
-					for ot := 0; ot < intKCP; ot++ { // перебор особой+целевой квоты
-						for st := 0; st < intKCP; st++ { // перебор специальной+целевой квоты
-							for ost := 0; ost < intKCP; ost++ { // перебор особой+специальной+целевой квоты
-								if os+ot+ost+o == O && os+st+ost+s == S && ot+st+ost+t == T && intKCP-(o+s+t+os+ot+st+ost) == 0 {
-									count++
-									fmt.Println("==================================================")
-									fmt.Printf("Вариант %v\n", count)
-									fmt.Printf("Плохой вариант %v\n", count2)
-									fmt.Printf("О+С\tО+Ц\tС+Ц\tО+С+Ц\tО\tС\tЦ\n")
-									fmt.Printf(" %v\t %v\t %v\t  %v\t%v\t%v\t%v\n", os, ot, st, ost, o, s, t)
-								} else {
-									count2++
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+	getVariants(intKCP, count, count2, O, S, T)
+
 }
 
 func getInput(message string) (result int) {
@@ -67,7 +45,7 @@ func getInput(message string) (result int) {
 
 	for _, elem := range input {
 		if !unicode.IsDigit(elem) || unicode.IsSpace(elem) { // проверяем строку на наличие пробелов и не цифр
-			fmt.Println("Пожалуйста, введите число без лишних символов")
+			fmt.Println("Пожалуйста, введите число без лишних символов") // если срабатывает, возвращает 0
 			getInput(message)
 			break
 		}
@@ -75,4 +53,32 @@ func getInput(message string) (result int) {
 
 	result, _ = strconv.Atoi(input)
 	return
+}
+
+func getVariants(intKCP, count, count2, O, S, T int) {
+	for o := 0; o < intKCP; o++ { // перебор особой квоты
+		for s := 0; s < intKCP; s++ { // перебор специальной квоты
+			for t := 0; t < intKCP; t++ { // перебор целевой квоты
+				for os := 0; os < intKCP; os++ { // перебор особой+специальной квоты
+					for ot := 0; ot < intKCP; ot++ { // перебор особой+целевой квоты
+						for st := 0; st < intKCP; st++ { // перебор специальной+целевой квоты
+							for ost := 0; ost < intKCP; ost++ { // перебор особой+специальной+целевой квоты
+								if os+ot+ost+o == O && os+st+ost+s == S && ot+st+ost+t == T && intKCP == o+s+t+os+ot+st+ost {
+									count++
+									// TO DO: писать в файл
+									fmt.Println("==================================================")
+									fmt.Printf("Вариант %v\n", count)
+									fmt.Printf("Плохой вариант %v\n", count2)
+									fmt.Printf("О+С\tО+Ц\tС+Ц\tО+С+Ц\tО\tС\tЦ\n")
+									fmt.Printf(" %v\t %v\t %v\t  %v\t%v\t%v\t%v\n", os, ot, st, ost, o, s, t)
+								} else {
+									count2++
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }

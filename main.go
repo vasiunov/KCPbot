@@ -32,6 +32,7 @@ func main() {
 	// boolOS := getOptions("ОСОБОЙ и СПЕЦИАЛЬНОЙ")
 	// boolST := getOptions("СПЕЦИАЛЬНОЙ и ЦЕЛЕВОЙ")
 	// boolOST := getOptions("ОСОБОЙ, ЦЕЛЕВОЙ и СПЕЦИАЛЬНОЙ")
+	// some code to check GPG
 
 	getVariants(intKCP, count, count2, O, S, T)
 

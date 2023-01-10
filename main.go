@@ -34,6 +34,7 @@ func main() {
 	// boolOST := getOptions("ОСОБОЙ, ЦЕЛЕВОЙ и СПЕЦИАЛЬНОЙ")
 	// some code to check GPG
 	// some code to check SSH
+	// some code to check SSH2
 
 	getVariants(intKCP, count, count2, O, S, T)
 

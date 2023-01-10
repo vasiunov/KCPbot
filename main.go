@@ -33,6 +33,7 @@ func main() {
 	// boolST := getOptions("СПЕЦИАЛЬНОЙ и ЦЕЛЕВОЙ")
 	// boolOST := getOptions("ОСОБОЙ, ЦЕЛЕВОЙ и СПЕЦИАЛЬНОЙ")
 	// some code to check GPG
+	// some code to check SSH
 
 	getVariants(intKCP, count, count2, O, S, T)
 

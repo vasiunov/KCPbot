@@ -35,6 +35,7 @@ func main() {
 	// some code to check GPG
 	// some code to check SSH
 	// some code to check SSH2
+	// some code to check SSH2 and GPG
 
 	getVariants(intKCP, count, count2, O, S, T)
 

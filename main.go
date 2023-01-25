@@ -32,10 +32,6 @@ func main() {
 	// boolOS := getOptions("ОСОБОЙ и СПЕЦИАЛЬНОЙ")
 	// boolST := getOptions("СПЕЦИАЛЬНОЙ и ЦЕЛЕВОЙ")
 	// boolOST := getOptions("ОСОБОЙ, ЦЕЛЕВОЙ и СПЕЦИАЛЬНОЙ")
-	// some code to check GPG
-	// some code to check SSH
-	// some code to check SSH2
-	// some code to check SSH2 and GPG
 
 	getVariants(intKCP, count, count2, O, S, T)
 
@@ -79,11 +75,9 @@ func getVariants(intKCP, count, count2, O, S, T int) {
 									// TO DO: write to file
 									fmt.Println("==================================================")
 									fmt.Printf("Вариант %v\n", count)
-									fmt.Printf("Плохой вариант %v\n", count2)
 									fmt.Printf("О+С\tО+Ц\tС+Ц\tО+С+Ц\tО\tС\tЦ\n")
 									fmt.Printf(" %v\t %v\t %v\t  %v\t%v\t%v\t%v\n", os, ot, st, ost, o, s, t)
-								} else {
-									count2++
+
 								}
 							}
 						}
